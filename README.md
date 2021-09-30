@@ -1,5 +1,5 @@
 # RadishBot
-此專案是Discord中RadishBot機器人的原始碼
+此專案是Discord中RadishBot機器人的原始碼，使用Discord.js v13製作
 ## 使用說明
 1. 使用前請先在終端機輸入以下指令：
 ```
