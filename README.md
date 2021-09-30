@@ -1,2 +1,2 @@
 # RadishBot
-RadishBot的原始碼
+此專案是Discord中RadishBot機器人的原始碼
