@@ -33,14 +33,14 @@ const commands = [
 },]; 
 
 
-const rest = new REST({ version: '9' }).setToken('ODkxMTk1MzIwNjkwNzAwMjk5.YU60Ug.Pz8hRpJ7aWLJHF4jXhYRQiPA_ts');
+const rest = new REST({ version: '9' }).setToken('token');
 
 (async () => {
   try {
     console.log(chalk.green('指令註冊 ') + '正在註冊機器人的斜線 (/) 指令');
 
     await rest.put(
-      Routes.applicationCommands("891195320690700299"),
+      Routes.applicationCommands(''),
       { body: commands },
     );
 
