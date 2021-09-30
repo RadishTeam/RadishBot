@@ -20,4 +20,4 @@ npm install discord.js @discordjs/rest discord-api-types @discordjs/builders cha
 
 ## 製作日誌
 
-2021 09 30 | .
+2021 09 30 | Update By Winson_章魚#9418
