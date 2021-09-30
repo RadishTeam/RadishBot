@@ -106,4 +106,4 @@ client.on('interactionCreate', async interaction => {
   }
 });
 //token登入
-client.login('ODkxMTk1MzIwNjkwNzAwMjk5.YU60Ug.Pz8hRpJ7aWLJHF4jXhYRQiPA_ts');
+client.login('token');
