@@ -14,10 +14,10 @@ npm install discord.js @discordjs/rest discord-api-types @discordjs/builders cha
 2. 接著將command.js以及bot.js檔案中的TOKEN或Client ID等字串數據替換為自己機器人的
 ( 可以從 https://discord.com/developers/applications 找到 )
 
-3. 運行command.js註冊機器人的斜線指令
-
-4. 運行bot.js讓機器人開始運行，此時機器人會上線。
+3. 運行index.js讓機器人註冊指令並開始運行，此時機器人會上線。
 
 ## 製作日誌
 
 2021 09 30 | Update By Winson_章魚#9418
+
+2021 10 04 | Update By Winson_章魚#9418
