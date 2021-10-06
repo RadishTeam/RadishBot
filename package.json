@@ -2,7 +2,7 @@
   "name": "RadishBot",
   "description": "Example",
   "version": "0.0.0",
-  "main": "bot.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
