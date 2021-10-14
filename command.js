@@ -1,6 +1,8 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const chalk = require('chalk');
+const { token, clientID } = require('./config.json');
+
 const logincommand = () => {
 	const commands = [
 	{
@@ -26,17 +28,21 @@ const logincommand = () => {
 	{
     	name: 'botinfo', 
     	description: '關於機器人的資訊'
+	},
+    {
+    	name: 'conch', 
+    	description: '想著你的問題，並使用這個指令，問問神奇海螺'
 	},]; 
 
 
-	const rest = new REST({ version: '9' }).setToken('token');
+	const rest = new REST({ version: '9' }).setToken(token);
 
 	(async () => {
   	try {
     	console.log(chalk.green('指令註冊 ') + '正在註冊機器人的斜線 (/) 指令');
 
     	await rest.put(
-      	Routes.applicationCommands("891195320690700299"),
+      	Routes.applicationCommands(clientID),
       	{ body: commands },
     	);
 
