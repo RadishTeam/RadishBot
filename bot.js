@@ -4,20 +4,19 @@ const { joinVoiceChannel, getVoiceConnection } = require("@discordjs/voice");
 const { createMusicManager, YoutubeUtils } = require('@kyometori/djsmusic');
 const chalk = require('chalk');
 const fs = require('fs');
-const translate = require('translate-google')
-const client = new Client({
-  intents: ['GUILDS', 'GUILD_VOICE_STATES']
-});
+const translate = require('translate-google');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, 'GUILDS', 'GUILD_VOICE_STATES'] });
 /*-----------------------------------------------------------------------------------------------*/
 const startbot = () => {
+  		const blockedUsers = ['ud1', 'id2'];
     	function timeResolve(second) {
           if (second < 60) return `0:${toTwoDigits(second)}`;
           else return `${~~(second/60)}:${toTwoDigits(second%60)}`;
-        }
+        };
 		const twoDigits = num => num < 10 ? `0${num}` : `${num}`;
         function toTwoDigits(num) {
           return num < 10 ? `0${num}` : `${num}`;
-        }
+        };
     	function deleteJSON(id) {
             //先將原本的 json 檔讀出來
             fs.readFile('./Material/userpoint.json', function (err, userInfo) {
@@ -46,13 +45,13 @@ const startbot = () => {
                     }
                 })
             })
-        }
+        };
     	function writeJSON(newUser) {
             //先將原本的 json 檔讀出來
             fs.readFile('./Material/userpoint.json', function (err, userInfo) {
                 if (err) {
                     return console.error(err);
-                }
+                };
             //將二進制數據轉換為字串符
                 var user = userInfo.toString();
             //將字符串轉換為 JSON 對象
@@ -95,19 +94,24 @@ const startbot = () => {
           });
         }
         //回覆或偵測用文字
-        const reply = ["不知道","我覺得可以喔","你做不到","先不要。","你一定可以的","你確定？","仔細思考，你自己一定知道答案","加油，努力就會成功","笑死欸，一定會失敗的","好喔。","再問一次吧！","不告訴你","一定會成功！","我相信你！","你的問題我不想回答","是喔。","所以呢？","我不要","我不愛你","你是想被我MUTE喔","不想理會","我覺得你可以放棄","你或許可以在這裡找到答案","我是海螺，住在海裡，你的問題，我只能沉默。","我是機器人，我選擇...不要選擇","我沒權限告訴你答案，因為你說得太抽象了","小孩子才問這問題","這問題神奇到我無法回答","有事請 https://google.com ，不要找我","此指令交互失敗，騙你的","只要你爽就好","我期待你的表現唷！","我再看看","我的運作時間為24h，除了週一到週日以外。\n現在為下班時間，請下次再來。","哈哈哈，我就不告訴你，就是玩","努力不懈，成功即至","不要啦，齁唷","加油，我愛你","應該會","不一定","可能吧","一定會"];
+    	const reply = ["不知道","我覺得可以喔","你做不到","先不要。","你一定可以的","你確定？","仔細思考，你自己一定知道答案","加油，努力就會成功","笑死欸，一定會失敗的","好喔。","再問一次吧！","不告訴你","一定會成功！","我相信你！","你的問題我不想回答","是喔。","所以呢？","我不要","我不愛你","你是想被我MUTE喔","不想理會","我覺得你可以放棄","你或許可以在這裡找到答案","我是海螺，住在海裡，你的問題，我只能沉默。","我是機器人，我選擇...不要選擇","我沒權限告訴你答案，因為你說得太抽象了","小孩子才問這問題","這問題神奇到我無法回答","有事請 https://google.com ，不要找我","此指令交互失敗，騙你的","只要你爽就好","我期待你的表現唷！","我再看看","我的運作時間為24h，除了週一到週日以外。\n現在為下班時間，請下次再來。","哈哈哈，我就不告訴你，就是玩","努力不懈，成功即至","不要啦，齁唷","加油，我愛你","應該會","不一定","可能吧","一定會"];
         const number = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100];
         const nosafe = ["https://discordgift.site/Q4YFjxxdkms2kzIo","discocrd.com","discord-egift.com","https://discords-premium.com/","https://dlscord.org/nitro-gift","http://discordc.gift/Yexjh7BuKC","https://minecraftspring04.weebly.com/java7","ɢoogle.com"]
         const eatcheap = ["蝦仁炒飯","油飯","滷肉飯","雞腿便當","排骨便當","漢堡","生菜沙拉","滷味","麵線","炒麵","鹹酥雞","水餃","甜不辣","燙青菜","臭豆腐"]
         const eatnomal = ["白醬義大利麵","番茄義大利麵","小披薩","炸雞","拉麵","馬鈴薯燉肉","番茄炒蛋","蔥爆牛肉","宮保雞丁","宮保花枝","白帶魚"]
         const eatexpen = ["昆布日式火鍋","鮭魚","壽司","紅棗枸杞養生鍋","鰻魚飯","紅燒鰻魚","炸鰻魚","海鮮火鍋","烤鴨"]
         const eatsoexp = ["龍蝦","帝王蟹","烏魚子"]
+        const prefix = "//"
         
         //嵌入
+        const saydm = new MessageEmbed()
+            .setColor(0xE4FFF6)
+            .setTitle('無法使用')
+            .setDescription('自2021/11/06開始，機器人指令僅限伺服器內使用')
+   		    .setFooter('RadishBot', 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
         const sayinvite = new MessageEmbed()
             .setColor(0xE4FFF6)
             .setTitle('RadishBot')
-            .setURL('https://reurl.cc/95pXqj')
             .setDescription('感謝您邀請RadishBot到您的伺服器')
             .addFields(
                 { name: '使用 (/) 呼叫斜線指令', value: '或使用 /help 獲取機器人的指令列表' }
@@ -118,7 +122,7 @@ const startbot = () => {
             .setTitle('RadishBot')
             .setDescription('指令列表與指令說明\n也可輸入斜線查看或使用斜線指令')
             .addFields(
-                { name: '音樂類 Music', value: '/join 讓機器人加入你的語音頻道\n/play 讓機器人撥放指定音樂\n/pause 暫停當前撥放音樂\n/resume 繼續撥放音樂\n/skip 跳過當前撥放音樂\n/shuffle 讓機器人打亂當前撥放隊列\n/leave 讓機器人離開你的語音頻道\n/loop 開始或停止音樂循環撥放\n/queue 查看即將撥放歌曲列表\n/nowplaying 查詢線在撥放歌曲' }
+                { name: '音樂類 Music', value: '/join 讓機器人加入你的語音頻道  /play 讓機器人撥放指定音樂\n/pause 暫停當前撥放音樂  /resume 繼續撥放音樂\n/skip 跳過當前撥放音樂  /shuffle 讓機器人打亂當前撥放隊列\n/leave 讓機器人離開你的語音頻道  /loop 開始或停止音樂循環撥放\n/queue 查看即將撥放歌曲列表  /nowplaying 查詢現在撥放歌曲\n/remove 刪除特定編號區間的歌曲' }
                 )
             .addFields(
                 { name: '管理類 Manage', value: '/ban 在伺服器停權指定用戶\n/kick 在伺服器踢出指定用戶' }
@@ -142,11 +146,16 @@ const startbot = () => {
                 { name: '獲得支援或查看機器人公告', value: 'https://discord.gg/uJjwyehrPK' }
                 )
         	.setFooter('RadishBot', 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
-
+		
+    	const sayblock = new MessageEmbed()
+            .setColor(0xE4FFF6)
+            .setTitle('封鎖通知')
+            .setDescription('機器人拒絕您使用指令，因為您在官方的封鎖名單內')
+    	    .setFooter('RadishBot', 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
+        
         const sayinfo = new MessageEmbed()
             .setColor(0xE4FFF6)
             .setTitle('RadishBot - 機器人資訊')
-            .setURL('')
             .setDescription('機器人的相關資訊')
             .addFields(
                 { name: '邀請機器人', value: 'https://reurl.cc/73eAWb' }
@@ -188,16 +197,40 @@ const startbot = () => {
             console.log(chalk.blue('啟動通知 ') + `${client.guilds.cache.size} 個伺服器`)
 
             //設定狀態
-            client.user.setPresence({ activities: [{ name: `/help • 在${client.guilds.cache.size}個伺服器` }], status: 'connecting' });
+            let all = 0
+            client.guilds.cache.forEach(guild => {
+                all = all + guild.memberCount                
+            })
+            client.user.setPresence({ activities: [{ name: `/help • ${client.guilds.cache.size}個伺服器 | ${all}個使用者` }], status: 'connecting' });
             //client.user.setPresence({ activities: [{ name: `機器人更新中` }], status: 'dnd' });
             //終端紀錄
             console.log(chalk.cyan('----------------過程變動區----------------'))
 
         });
+    	client.on('messageCreate', message => {
+            if (message.guildId != "891279597830803467") return;
+            if (message.content == prefix + "test") {
+                message.reply("機器人訊息回覆成功運行")
+            }
+        })
+    	client.on('messageDelete', message => {
+            if (message.guildId != "891279597830803467") return;
+            const sayre = new MessageEmbed()
+                .setColor(0xE4FFF6)
+                .setTitle('審核日誌')
+                .setDescription(`一則由 ${message.author.tag} 發送的訊息遭到刪除\n內容：${message.content}`)
+                .setFooter('RadishBot', 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
+            const rechannel = client.channels.cache.get('906546032341553172');
+            rechannel.send({ embeds: [sayre] })
+        });
         //新增
         client.on("guildCreate", async guild => {
             console.log(chalk.green('進退變動 ') +`加入${guild.name}`)
-            client.user.setPresence({ activities: [{ name: `/help • 在${client.guilds.cache.size}個伺服器` }], status: 'connecting' });
+            let all = 0
+            client.guilds.cache.forEach(guild => {
+                all = all + guild.memberCount                
+            })
+            client.user.setPresence({ activities: [{ name: `/help • ${client.guilds.cache.size}個伺服器 | ${all}個使用者` }], status: 'connecting' });
             //console 頻道
             const invitechannel = client.channels.cache.get('896381065546063963');
             //進退變動 加入
@@ -208,22 +241,157 @@ const startbot = () => {
         //刪除
         client.on("guildDelete", async guild => {
             console.log(chalk.green('進退變動 ') +`離開${guild.name}`);
-            client.user.setPresence({ activities: [{ name: `/help • 在${client.guilds.cache.size}個伺服器` }], status: 'connecting' });
+            let all = 0
+            client.guilds.cache.forEach(guild => {
+                all = all + guild.memberCount                
+            })
+            client.user.setPresence({ activities: [{ name: `/help • ${client.guilds.cache.size}個伺服器 | ${all}個使用者` }], status: 'connecting' });
             //console 頻道
             const invitechannel = client.channels.cache.get('896381065546063963');
             //進退變動 離開
             invitechannel.send("```" + `機器人已離開：${guild.name}` + "```")
         })
         //指令
-        client.on('interactionCreate', async interaction => {
+        client.on('interactionCreate', async interaction => {             
             if (!interaction.isCommand()) return;
+            if (!interaction.inGuild()) return interaction.reply({ embeds: [saydm] });
+            if (blockedUsers.includes(interaction.user.id)) return interaction.reply({ embeds: [sayblock] });
+            
             const commandChannel = client.channels.cache.get('904737725532504105');
-            //進退變動 離開
             commandChannel.send("```" + `【${interaction.user.tag}】使用了( /${interaction.commandName} )指令` + "```")
 
+            if (interaction.commandName === 'help') {
+                if (!interaction.inGuild()) return interaction.reply(`🪂 此指令只能在伺服器中使用`);
+                let res = new MessageEmbed()
+                  .setAuthor('指令中心', interaction.client.user.displayAvatarURL())
+                  .setColor(0xE4FFF6);
+                const commands = [];    
+                const cmdDirs = fs.readdirSync('./commands');
+                for (const dir of cmdDirs) {
+                    const commandFiles = fs.readdirSync(`./commands/${dir}`).filter(file => file.endsWith('.js'));
+                    for (const file of commandFiles) {
+                        const command = require(`./commands/${dir}/${file}`);
+                        commands.push(command.data.toJSON());
+                    }
+                }
+                await interaction.deferReply();
 
-            if (interaction.commandName === 'help') {                
-                await interaction.reply({ embeds: [sayhelp] });
+                const pages = Math.ceil((commands.length - 1)/8);
+
+                const pageButtons = {
+                  home: new MessageButton({
+                    customId: 'PageButtonHome',
+                    label: '|<',
+                    style: 'PRIMARY',
+                    disabled: true
+                  }),
+                  prev: new MessageButton({
+                    customId: 'PageButtonPrev',
+                    label: '<',
+                    style: 'PRIMARY',
+                    disabled: true
+                  }),
+                  exit: new MessageButton({
+                    customId: 'PageButtonExit',
+                    label: 'x',
+                    style: 'DANGER'
+                  }),
+                  next: new MessageButton({
+                    customId: 'PageButtonNext',
+                    label: '>',
+                    style: 'PRIMARY',
+                    disabled: pages.length < 2
+                  }),
+                  end: new MessageButton({
+                    customId: 'PageButtonEnd',
+                    label: '>|',
+                    style: 'PRIMARY',
+                    disabled: pages.length < 2
+                  })
+                }
+
+                let index = 1;
+
+                const row = new MessageActionRow({
+                  components: Object.values(pageButtons)
+                });
+
+                async function filter(i) {
+                  if (!i.customId.startsWith('PageButton')) return false;
+                  await i.deferUpdate();
+                  return true;
+                }
+
+                res = new MessageEmbed()
+                  .setAuthor('指令列表', interaction.client.user.displayAvatarURL())
+                  .setDescription("機器人的指令列表")
+                  .setFooter(`${interaction.user.tag}・第 ${index}/${pages} 頁`, interaction.user.displayAvatarURL())
+                if (index == pages) {
+                    for (var i = 1 ; i < commands.length%8 ; i++) {
+                            res.addFields(
+                                  { name: `/${commands[index*8-8+i].name}`, value: `${commands[index*8-8+i].description}` }
+                                );
+                            }
+                } else {
+                    for (var i = 8 ; i >= 1 ; i--) {
+                    res.addFields(
+                          { name: `/${commands[index*8-i].name}`, value: `${commands[index*8-i].description}` }
+                        );
+                	}
+                }
+
+                interaction.editReply({ embeds: [res], components: [row] })
+                  .then(message => {
+                    message.createMessageComponentCollector({
+                      filter: filter,
+                      idle: 30e3,
+                      componentType: 'BUTTON'
+                    }).on('collect', function(i) {
+                      if (i.customId === 'PageButtonExit') {
+                        this.stop('EXIT');
+                        return message.delete();
+                      }
+
+                      switch (i.customId) {
+                        case 'PageButtonHome': index = 1; break;
+                        case 'PageButtonPrev': index-- ; break;
+                        case 'PageButtonNext': index++ ; break;
+                        case 'PageButtonEnd': index = pages ; break;
+                      }
+
+                      pageButtons.home.setDisabled(index == 1);
+                      pageButtons.prev.setDisabled(index == 1);
+                      pageButtons.next.setDisabled(index == pages);
+                      pageButtons.end.setDisabled(index == pages);
+
+                      res = new MessageEmbed() 
+                        .setAuthor('指令列表', interaction.client.user.displayAvatarURL())
+                        .setDescription("機器人的指令列表")
+                  		.setFooter(`${interaction.user.tag}・第 ${index}/${pages} 頁`, interaction.user.displayAvatarURL())
+                  		if (index == pages) {
+                            for (var i = 1 ; i < commands.length%8 ; i++) {
+                            res.addFields(
+                                  { name: `/${commands[index*8-8+i].name}`, value: `${commands[index*8-8+i].description}` }
+                                );
+                            }
+                        } else {
+                            for (var i = 8 ; i >= 1 ; i--) {
+                            res.addFields(
+                                  { name: `/${commands[index*8-i].name}`, value: `${commands[index*8-i].description}` }
+                                );
+                            }
+                        }
+
+                      const newRow = new MessageActionRow({
+                        components: Object.values(pageButtons)
+                      });
+
+                      interaction.editReply({ embeds: [res], components: [newRow] });
+                    }).once('end', (_, reason) => {
+                      if (reason === 'EXIT') return;
+                      message.delete().catch(() => {});
+                    })
+                  });
             }
             if (interaction.commandName === 'botping') {
                 await interaction.reply(`🏠╎Websocket Latency: ${client.ws.ping}ms\n🤖╎Bot Latency: ${Date.now() - interaction.createdTimestamp}ms`);
@@ -882,6 +1050,7 @@ const startbot = () => {
                 interaction.editReply({ embeds: [res] });
             }
             if (interaction.commandName === 'queue') {
+                if (!interaction.inGuild()) return interaction.reply(`🪂 此指令只能在伺服器中使用`);
                 const res = new MessageEmbed()
                   .setAuthor('通知中心', interaction.client.user.displayAvatarURL())
                   .setColor(0xE4FFF6);
@@ -1030,6 +1199,69 @@ const startbot = () => {
                     })
                   });
             }
+            if (interaction.commandName === 'remove') {
+                if (!interaction.inGuild()) return interaction.reply(`🪂 此指令只能在伺服器中使用`);
+                const res = new MessageEmbed()
+                  .setAuthor('通知中心', interaction.client.user.displayAvatarURL())
+                  .setColor(0xE4FFF6);
+
+                if (!interaction.client.music.has(interaction.guild.id)) {
+                  res.setDescription('機器人不在任何語音頻道內');
+                  return interaction.reply({
+                    embeds: [res]
+                  });
+                }
+
+                const manager = interaction.client.music.get(interaction.guild.id);
+
+                if (!interaction.member.voice.channel ||
+                    interaction.member.voice.channel.id !== manager.channel.id) {
+
+                  res.setDescription('機器人不在你的語音頻道內');
+                  return interaction.reply({
+                    embeds: [res]
+                  });
+                }
+
+                if(!manager.queue.length) {
+                  res.setDescription('隊列裡沒有任何音樂')
+                  return interaction.reply({
+                    embeds: [res]
+                  })
+                }
+
+                await interaction.deferReply();
+				
+                const start = interaction.options.getInteger('start');
+                let end = interaction.options.getInteger('end') ?? start;
+
+                if (end < start) {
+                  res.setDescription('結尾的數字不能小於起始');
+                  return interaction.editReply({ embeds: [res] });
+                }
+
+                if (start < 1 || end < 0) {
+                  res.setDescription('起始的音樂不能小於第一首');
+                  return interaction.editReply({ embeds: [res] });
+                }
+
+                if (start > manager.queue.length) {
+                  res.setDescription('起始音樂大於歌曲列表長度');
+                  return interaction.editReply({ embeds: [res] });
+                }
+
+                if (end > manager.queue.length) {
+                  end = manager.queue.length;
+                }
+
+                manager.queue.splice(start-1, end-start+1);
+                res.setDescription(`${interaction.user}，已移除編號在 ${start} 到 ${end} 之間的所有歌曲`);
+                if(start === end)
+                  res.setDescription(`${interaction.user}，已移除編號為 ${start} 的歌曲`);
+
+                interaction.editReply({ embeds: [res] });               
+                
+            }
             if (interaction.commandName === 'leave') {
                 if (!interaction.inGuild()) return interaction.reply(`🪂 此指令只能在伺服器中使用`);
                 const res = new MessageEmbed()
@@ -1071,17 +1303,129 @@ const startbot = () => {
                     interaction.reply("此指令為機器人擁有者專屬指令");
                 }
             }
+            if (interaction.commandName === 'commands') {
+                if (!interaction.inGuild()) return interaction.reply(`🪂 此指令只能在伺服器中使用`);
+                let res = new MessageEmbed()
+                  .setAuthor('指令中心', interaction.client.user.displayAvatarURL())
+                  .setColor(0xE4FFF6);
+                const commands = [];    
+                const cmdDirs = fs.readdirSync('./commands');
+                for (const dir of cmdDirs) {
+                    const commandFiles = fs.readdirSync(`./commands/${dir}`).filter(file => file.endsWith('.js'));
+                    for (const file of commandFiles) {
+                        const command = require(`./commands/${dir}/${file}`);
+                        commands.push(command.data.toJSON());
+                    }
+                }
+                await interaction.deferReply();
 
+                const pages = commands.length - 1;
+
+                const pageButtons = {
+                  home: new MessageButton({
+                    customId: 'PageButtonHome',
+                    label: '|<',
+                    style: 'PRIMARY',
+                    disabled: true
+                  }),
+                  prev: new MessageButton({
+                    customId: 'PageButtonPrev',
+                    label: '<',
+                    style: 'PRIMARY',
+                    disabled: true
+                  }),
+                  exit: new MessageButton({
+                    customId: 'PageButtonExit',
+                    label: 'x',
+                    style: 'DANGER'
+                  }),
+                  next: new MessageButton({
+                    customId: 'PageButtonNext',
+                    label: '>',
+                    style: 'PRIMARY',
+                    disabled: pages.length < 2
+                  }),
+                  end: new MessageButton({
+                    customId: 'PageButtonEnd',
+                    label: '>|',
+                    style: 'PRIMARY',
+                    disabled: pages.length < 2
+                  })
+                }
+
+                let index = 0;
+
+                const row = new MessageActionRow({
+                  components: Object.values(pageButtons)
+                });
+
+                async function filter(i) {
+                  if (!i.customId.startsWith('PageButton')) return false;
+                  await i.deferUpdate();
+                  return true;
+                }
+
+                res = new MessageEmbed()
+                  .setAuthor('指令列表', interaction.client.user.displayAvatarURL())
+                  .setDescription("機器人的指令清單")
+                  .setFooter(`${interaction.user.tag}・第 ${index+1}/${pages} 頁`, interaction.user.displayAvatarURL())
+                  .addFields(
+                      { name: `/${commands[index].name}`, value: `${commands[index].description}` }
+                   );
+
+                interaction.editReply({ embeds: [res], components: [row] })
+                  .then(message => {
+                    message.createMessageComponentCollector({
+                      filter: filter,
+                      idle: 30e3,
+                      componentType: 'BUTTON'
+                    }).on('collect', function(i) {
+                      if (i.customId === 'PageButtonExit') {
+                        this.stop('EXIT');
+                        return message.delete();
+                      }
+
+                      switch (i.customId) {
+                        case 'PageButtonHome': index = 0; break;
+                        case 'PageButtonPrev': index-- ; break;
+                        case 'PageButtonNext': index++ ; break;
+                        case 'PageButtonEnd': index = pages - 1; break;
+                      }
+
+                      pageButtons.home.setDisabled(index == 0);
+                      pageButtons.prev.setDisabled(index == 0);
+                      pageButtons.next.setDisabled(index == pages - 1);
+                      pageButtons.end.setDisabled(index == pages - 1);
+
+                      res = new MessageEmbed() 
+                        .setAuthor('指令列表', interaction.client.user.displayAvatarURL())
+                        .setDescription("機器人的指令清單")
+                  		.setFooter(`${interaction.user.tag}・第 ${index+1}/${pages} 頁`, interaction.user.displayAvatarURL())
+                  		.addFields(
+                      		{ name: `/${commands[index].name}`, value: `${commands[index].description}` }
+                 		);
+
+                      const newRow = new MessageActionRow({
+                        components: Object.values(pageButtons)
+                      });
+
+                      interaction.editReply({ embeds: [res], components: [newRow] });
+                    }).once('end', (_, reason) => {
+                      if (reason === 'EXIT') return;
+                      message.delete().catch(() => {});
+                    })
+                  });
+            }
     })
     client.on('interactionCreate', interaction => {
 		if (!interaction.isButton()) return;
-		if (interaction.customId === 'idHere') {
+		if (interaction.customId === 'startinq') {
             
         }
 	});
     
 	//token登入
-	client.login("TOKEN");
+	client.login("TOKEN HERE");
 
 }
 module.exports = startbot;
