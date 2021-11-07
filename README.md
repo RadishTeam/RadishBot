@@ -20,3 +20,5 @@ npm install discord.js @kyometori/djsmusic @discordjs/voice @discordjs/rest disc
 2021 10 04 | Update By Winson_章魚#9418
 
 2021 11 04 | Update By Winson_章魚#9418
+
+2021 11 07 | Update By Winson_章魚#9418
