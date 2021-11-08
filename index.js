@@ -9,12 +9,13 @@ console.log = (...args) => {
 console.log(chalk.magenta('----------------啟動訊息區-----------------'));
 console.log(chalk.red('開始啟動 ') + '機器人已開始啟動');
 
-const commandLogin = true
+const commandLogin = false
 const botRun = true
 //require('./command-help')();
+
 if (commandLogin) {
-    require('./sub-command')();
+    require('./sub_command')();
 }
 if (botRun) {
-	require('./bot')();
+    require('./bot')();
 }
