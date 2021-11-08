@@ -8,10 +8,12 @@
 npm install discord.js @kyometori/djsmusic @discordjs/voice @discordjs/rest discord-api-types @discordjs/builders chalk fs translate-google
 ```
 
-2. 接著將command.js以及bot.js檔案中的TOKEN或Client ID等字串數據替換為自己機器人的
-( 可以從 https://discord.com/developers/applications 找到 )
+2. 接著將config.json中的各個數據替換為自己機器人的
+( token 以及 client-ID 可以從 https://discord.com/developers/applications 找到 )
 
-3. 運行index.js讓機器人註冊指令並開始運行，此時機器人會上線。
+3. 運行dbInit.js，以讓機器人的經濟功能初始化。
+
+4. 運行index.js讓機器人註冊指令並開始運行，此時機器人會上線。
 
 ## 📌 製作日誌
 
@@ -22,3 +24,5 @@ npm install discord.js @kyometori/djsmusic @discordjs/voice @discordjs/rest disc
 2021 11 04 | Update By Winson_章魚#9418
 
 2021 11 07 | Update By Winson_章魚#9418
+
+2021 11 08 | Update By Winson_章魚#9418
