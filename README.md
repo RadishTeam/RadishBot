@@ -26,3 +26,5 @@ npm install
 2021 11 07 | Update By Winson_章魚#9418
 
 2021 11 08 | Update By Winson_章魚#9418
+
+2021 11 14 | Update By Winson_章魚#9418
