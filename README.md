@@ -8,7 +8,7 @@
 npm install
 ```
 
-2. 接著將config.json中的各個數據替換為自己機器人的
+2. 接著將config.js中的各個數據替換為自己機器人的或者使用.env
 ( token 以及 client-ID 可以從 https://discord.com/developers/applications 找到 )
 
 3. 運行dbInit.js，以讓機器人的經濟功能初始化。
