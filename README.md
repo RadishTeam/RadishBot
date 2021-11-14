@@ -5,7 +5,7 @@
 ## 🔮 使用說明
 1. 使用前請先在終端機輸入以下指令：
 ```
-npm install discord.js @kyometori/djsmusic @discordjs/voice @discordjs/rest discord-api-types @discordjs/builders chalk fs translate-google
+npm install
 ```
 
 2. 接著將config.json中的各個數據替換為自己機器人的
