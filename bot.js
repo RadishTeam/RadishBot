@@ -1,7 +1,6 @@
 const {
     Collection,
     Client,
-    Intents,
     Formatters
 } = require('discord.js');
 const {
@@ -18,10 +17,6 @@ const {
     CurrencyShop
 } = require('./dbObjects.js');
 const {
-    joinVoiceChannel,
-    getVoiceConnection
-} = require("@discordjs/voice");
-const {
     createMusicManager,
     YoutubeUtils
 } = require('@kyometori/djsmusic');
@@ -29,7 +24,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const translate = require('translate-google');
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, 'GUILDS', 'GUILD_VOICE_STATES']
+    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES']
 });
 const currency = new Collection();
 /*-----------------------------------------------------------------------------------------------*/
