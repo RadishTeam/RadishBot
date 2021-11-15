@@ -541,7 +541,7 @@ const startbot = () => {
             const weight = interaction.options.getNumber('weight');
             const height = interaction.options.getNumber('height');
             let bmi = Math.floor(weight / ((height / 100) ** 2));
-            const bniys = bmi >= 18.5 && bmi < 24 ? "正常" : "不正常";
+            const bmiys = bmi >= 18.5 && bmi < 24 ? "正常" : "不正常";
             
             const userbmi = new MessageEmbed()
                 .setColor('#FF5151')
