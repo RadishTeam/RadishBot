@@ -272,7 +272,7 @@ const startbot = () => {
                 })
                 .addFields({
                     name: '擁有者',
-                    value: `<@${interaction.guild.this.config.ownerId}>`,
+                    value: `<@${interaction.guild.ownerId}>`,
                     inline: true
                 })
             await interaction.reply({
