@@ -161,10 +161,8 @@ const startbot = () => {
         console.log(chalk.blue('啟動通知 ') + `${client.guilds.cache.size} 個伺服器`)
         
         //設定狀態
-        let all = 0
-        client.guilds.cache.forEach(guild => {
-            all = all + guild.memberCount
-        })
+        const all = client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0);
+        
         client.user.setPresence({
             activities: [{
                 name: `/help • ${client.guilds.cache.size}個伺服器 | ${all}個使用者`
@@ -542,14 +540,9 @@ const startbot = () => {
         if (interaction.commandName === 'bmi') {
             const weight = interaction.options.getNumber('weight');
             const height = interaction.options.getNumber('height');
-            let bmi = 0
-            let bmiys = ""
-            bmi = Math.floor(weight / ((height / 100) ** 2))
-            if (bmi >= 18.5 && bmi < 24) {
-                bmiys = "正常"
-            } else {
-                bmiys = "不正常"
-            }
+            let bmi = Math.floor(weight / ((height / 100) ** 2));
+            const bmiys = bmi >= 18.5 && bmi < 24 ? "正常" : "不正常";
+            
             const userbmi = new MessageEmbed()
                 .setColor('#FF5151')
                 .setTitle(`身體質量指數`)
