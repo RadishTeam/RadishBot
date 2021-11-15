@@ -33,17 +33,9 @@ const startbot = () => {
     }
     if (this.config.token === "")
         return new TypeError(
-            "The botconfig.js is not filled out. Please make sure nothing is blank, otherwise the bot will not work properly."
+            "沒有找到 token! 請在 config.js 中輸入您的token!"
         );
     const blockedUsers = ['ud1', 'id2'];
-
-    if (this.config.slashcmdreg !== "true") return
-    let cmdRun = true
-
-    if (cmdRun) {
-        require('./sub_command')();
-    }
-
 
     function timeResolve(second) {
         if (second < 60) return `0:${toTwoDigits(second)}`;
