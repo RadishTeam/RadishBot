@@ -11,9 +11,7 @@ npm install
 2. 接著將config.json中的各個數據替換為自己機器人的
 ( token 以及 client-ID 可以從 https://discord.com/developers/applications 找到 )
 
-3. 運行dbInit.js，以讓機器人的經濟功能初始化。
-
-4. 運行index.js讓機器人註冊指令並開始運行，此時機器人會上線。
+3. 運行index.js讓機器人註冊指令並開始運行，此時機器人會上線。
 
 ## 📌 製作日誌
 
