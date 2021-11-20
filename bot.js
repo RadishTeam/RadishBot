@@ -25,7 +25,7 @@ const startbot = () => {
     } catch (error) {
         console.log(error)
     }
-    if (this.config.token)
+    if (!this.config.token)
         return new TypeError(
             '沒有找到 token! 請在 config.js 中輸入您的token!'
         );
