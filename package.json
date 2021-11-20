@@ -1,5 +1,5 @@
 {
-  "name": "RadishBot",
+  "name": "radish-bot",
   "version": "7.0.0",
   "description": "用於管理、娛樂，也可以協助您完成生活的大小事！讓您更加方便的使用Discord，涵蓋了各大常用功能，包羅萬象！",
   "main": "index.js",
@@ -20,5 +20,8 @@
     "fs": "^0.0.1-security",
     "translate-google": "^1.5.0",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0"
   }
 }
