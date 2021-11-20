@@ -20,15 +20,13 @@ const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_S
 /* ----------------------------------------------------------------------------------------------- */
 const startbot = () => {
     try {
-        //Config
+        // Config
         this.config = require('./config.js');
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
     if (!this.config.token)
-        return new TypeError(
-            '沒有找到 token! 請在 config.js 中輸入您的token!'
-        );
+        return new TypeError('沒有找到 token! 請在 config.js 中輸入您的token!');
     const blockedUsers = ['ud1', 'id2'];
 
     function timeResolve(second) {
@@ -61,7 +59,7 @@ const startbot = () => {
         if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
             d += performance.now();
         }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             const r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
             return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
@@ -80,7 +78,6 @@ const startbot = () => {
     const prefix = '//';
 
     // 嵌入
-    
 
     const sayinvite = new MessageEmbed()
         .setColor(0xE4FFF6)
@@ -227,7 +224,7 @@ const startbot = () => {
                     .setColor(0xE4FFF6)
                     .setTitle('無法使用')
                     .setDescription('自2021/11/06開始，機器人指令僅限伺服器內使用')
-                    .setFooter('RadishBot', 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80')
+                    .setFooter('RadishBot', 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80'),
             ],
         });
         if (blockedUsers.includes(interaction.user.id)) return interaction.reply({
@@ -317,8 +314,6 @@ const startbot = () => {
             if (hours >= 24) {
                 hours = hours - 24;
                 day = day + 1;
-            } else {
-                hours = hours;
             }
             await interaction.reply('現在時間：`' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒`');
         }
@@ -329,7 +324,7 @@ const startbot = () => {
         if (interaction.commandName === 'linksafe') {
             let safe = 0;
             const link = interaction.options.getString('link');
-            for (i = 0; i <= nosafe.length; i++) {
+            for (let i = 0; i <= nosafe.length; i++) {
                 if (link.includes(nosafe[i])) {
                     safe = 1;
                 }
@@ -409,7 +404,7 @@ const startbot = () => {
                     '回報者',
                     `${interaction.user.tag} • \`${interaction.user.id}\``,
                 );
-            const reportchannel = client.channels.cache.get(reportChannel);
+            const reportchannel = client.channels.cache.get(this.config.reportChannel);
             reportchannel.send({
                 embeds: [suggestembed],
             });
@@ -659,13 +654,11 @@ const startbot = () => {
                     } else {
                         res.setDescription(`已將 ${track.audioResource} 加入隊列`);
                     }
+                } else if (track.details.from === 'Youtube') {
+                    res.setThumbnail(track.details.data.thumbnailUrl)
+                        .setDescription(`開始播放 [${track.title}](${track.details.data.url})`);
                 } else {
-                    if (track.details.from === 'Youtube') {
-                        res.setThumbnail(track.details.data.thumbnailUrl)
-                            .setDescription(`開始播放 [${track.title}](${track.details.data.url})`);
-                    } else {
-                        res.setDescription(`開始播放 ${track.audioResource}`);
-                    }
+                    res.setDescription(`開始播放 ${track.audioResource}`);
                 }
 
                 interaction.editReply({
@@ -903,7 +896,7 @@ const startbot = () => {
 
             await interaction.deferReply();
 
-            manager.queue = manager.queue.sort((a, b) => Math.random() - 0.5);
+            manager.queue = manager.queue.sort(() => Math.random() - 0.5);
 
             res.setDescription('成功將隊列順序打亂');
 
@@ -1043,20 +1036,6 @@ const startbot = () => {
                 components: Object.values(pageButtons),
             });
 
-            async function filter(i) {
-                if (!i.customId.startsWith('PageButton')) return false;
-                await i.deferUpdate();
-
-                if (i.user.id !== interaction.user.id) {
-                    i.followUp({
-                        content: '請勿使用他人的按鈕',
-                        ephemeral: true,
-                    });
-                    return false;
-                }
-                return true;
-            }
-
             res.setAuthor('音樂中心', interaction.client.user.displayAvatarURL())
                 .setDescription(`\` >> \` [${nowPlaying.name}](${nowPlaying.url})\n\n${pages[0].join('\n')}`)
                 .setFooter(`${interaction.user.tag}・第 ${index + 1}/${pages.length} 頁`, interaction.user.displayAvatarURL());
@@ -1068,11 +1047,21 @@ const startbot = () => {
             })
                 .then(message => {
                     message.createMessageComponentCollector({
-                        filter: filter,
+                        async filter(i) {
+                            if (!i.customId.startsWith('PageButton')) return false;
+                            await i.deferUpdate();
+                            if (i.user.id !== interaction.user.id) {
+                                i.followUp({
+                                    content: '請勿使用他人的按鈕',
+                                    ephemeral: true,
+                                });
+                                return false;
+                            }
+                            return true;
+                        },
                         idle: 30e3,
-
                         componentType: 'BUTTON',
-                    }).on('collect', function (i) {
+                    }).on('collect', function(i) {
                         if (i.customId === 'PageButtonExit') {
                             i.followUp({
                                 content: '清單已關閉',
@@ -1115,7 +1104,7 @@ const startbot = () => {
                         });
                     }).once('end', (_, reason) => {
                         if (reason === 'EXIT') return;
-                        message.delete().catch(() => {});
+                        message.delete();
                         interaction.followUp({
                             content: '清單因閒置過久而自動關閉',
                             ephemeral: true,
@@ -1301,12 +1290,6 @@ const startbot = () => {
                 components: Object.values(pageButtons),
             });
 
-            async function filter(i) {
-                if (!i.customId.startsWith('PageButton')) return false;
-                await i.deferUpdate();
-                return true;
-            }
-
             res = new MessageEmbed()
                 .setAuthor('指令列表', interaction.client.user.displayAvatarURL())
                 .setDescription('機器人的指令清單')
@@ -1322,7 +1305,11 @@ const startbot = () => {
             })
                 .then(message => {
                     message.createMessageComponentCollector({
-                        filter: filter,
+                        async filter(i) {
+                            if (!i.customId.startsWith('PageButton')) return false;
+                            await i.deferUpdate();
+                            return true;
+                        },
                         idle: 30e3,
                         componentType: 'BUTTON',
                     }).on('collect', function(i) {
@@ -1370,7 +1357,7 @@ const startbot = () => {
                         });
                     }).once('end', (_, reason) => {
                         if (reason === 'EXIT') return;
-                        message.delete().catch(() => {});
+                        message.delete();
                     });
                 });
         }
@@ -1437,40 +1424,19 @@ const startbot = () => {
                 components: [selectRow, buttonRow],
             });
 
-            async function filter(i) {
-                if (!i.customId.startsWith('MusicSearch')) return false;
-
-                await i.deferUpdate();
-
-                if (i.user.id !== interaction.user.id) {
-                    i.followUp({
-                        content: i.isButton() ? '您無法使用他人的按鈕' : '您無法使用他人的選單',
-                        ephemeral: true,
-                    });
-                    return false;
-                }
-                return true;
-            }
-
-            async function afterPlay([track, queued]) {
-                await track.details.data.fetch();
-                res.setThumbnail(track.details.data.thumbnailUrl)
-                    .setAuthor('通知中心', interaction.client.user.displayAvatarURL())
-                    .setFooter(`由 ${track.player.displayName} 指定的歌曲`, track.player.user.displayAvatarURL());
-
-                if (queued) {
-                    res.setDescription(`已將 [${track.title}](${track.details.data.url}) 加入隊列`);
-                } else {
-                    res.setDescription(`開始播放 [${track.title}](${track.details.data.url})`);
-                }
-
-                interaction.channel.send({
-                    embeds: [res],
-                });
-            }
-
             message.awaitMessageComponent({
-                filter: filter,
+                async filter(i) {
+                    if (!i.customId.startsWith('MusicSearch')) return false;
+                    await i.deferUpdate();
+                    if (i.user.id !== interaction.user.id) {
+                        i.followUp({
+                            content: i.isButton() ? '您無法使用他人的按鈕' : '您無法使用他人的選單',
+                            ephemeral: true,
+                        });
+                        return false;
+                    }
+                    return true;
+                },
                 time: 30e3,
                 error: ['time'],
             })
@@ -1488,7 +1454,20 @@ const startbot = () => {
                     data.play(interaction.client.music.get(interaction.guild.id), {
                         player: interaction.member,
                     })
-                        .then(afterPlay)
+                        .then(async ([track, queued]) => {
+                            await track.details.data.fetch();
+                            res.setThumbnail(track.details.data.thumbnailUrl)
+                                .setAuthor('通知中心', interaction.client.user.displayAvatarURL())
+                                .setFooter(`由 ${track.player.displayName} 指定的歌曲`, track.player.user.displayAvatarURL());
+                            if (queued) {
+                                res.setDescription(`已將 [${track.title}](${track.details.data.url}) 加入隊列`);
+                            } else {
+                                res.setDescription(`開始播放 [${track.title}](${track.details.data.url})`);
+                            }
+                            interaction.channel.send({
+                                embeds: [res],
+                            });
+                        })
                         .catch(e => {
                             if (e.message === 'INVALID_YOUTUBE_URL') {
                                 return i.followUp({
@@ -1607,29 +1586,30 @@ const startbot = () => {
             if (youcho == 'sto' && botcho == 'pap') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
         }
         if (interaction.commandName === 'bullshitter') {
-            const bullreply = `${bullshitter[getRandom(bullshitter.length) - 1]}`;
+            const bullreply = `${bullshitter[getRandom(bullshitter.length) - 1]}`.replace(/<name>/g, topic);
             const topic = interaction.options.getString('topic');
-            const reply = bullreply.replace(/<name>/g, topic);
             const replyans = new MessageEmbed()
                 .setColor('RANDOM')
                 .setTitle(`${topic}`)
-                .setDescription(`${reply}`)
+                .setDescription(`${bullreply}`)
                 .setFooter(`${interaction.user.tag}`, `${interaction.user.displayAvatarURL()}`);
             interaction.reply({
-                embeds: [replyans]
-            })
+                embeds: [replyans],
+            });
         }
     });
+    /*
     client.on('interactionCreate', interaction => {
         if (!interaction.isButton()) return;
         if (interaction.customId === 'startinq') {
 
         }
     });
+    */
 
     // this.config.token登入
     client.login(this.config.token);
 
-}
+};
 
 module.exports = startbot;

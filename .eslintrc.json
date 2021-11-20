@@ -17,7 +17,7 @@
         ],
         "brace-style": [
             "error",
-            "stroustrup",
+            "1tbs",
             {
                 "allowSingleLine": true 
             }
@@ -28,12 +28,6 @@
         ],
 		"comma-spacing": "error",
 		"comma-style": "error",
-		"curly": [
-            "error", 
-            "multi",
-            "multi-line", 
-            "consistent"
-        ],
 		"dot-location": [
             "error", 
             "property"
