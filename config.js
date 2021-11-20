@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   owner: ['在此輸入或使用.env'], // 可以使用擁有者指令的用戶ID
   botName: process.env.botName || '在此輸入或使用.env', // 機器人名稱
