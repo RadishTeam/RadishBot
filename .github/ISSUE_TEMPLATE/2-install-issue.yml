@@ -28,7 +28,7 @@ body:
         - yarn
         - pnpm
         - cnmp
-        - others
+        - Others
     validations:
       required: true
       
@@ -42,7 +42,7 @@ body:
         - Linux (Others)
         - Mac
         - Windows
-        - other
+        - Others
     validations:
       required: true
   - type: textarea
