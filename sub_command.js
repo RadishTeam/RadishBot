@@ -36,7 +36,7 @@ const logincommand = () => {
             );
             console.log(chalk.red("斜線指令") + ' 成功註冊機器人互動應用程式指令 (/) Slash command');
         } catch (error) {
-            console.error(error);
+            if (error.message.includes("Invalid Form Body")) return console.log(chalk.red('錯誤: 已經注冊過斜綫指令了 (/), 請將 config.js 中的 slashcmdreg 選項改爲 false'))
         }
     })();
 }
