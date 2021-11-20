@@ -21,13 +21,13 @@ const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_S
 const startbot = () => {
     try {
         //Config
-        this.config = require("./config.js");
+        this.config = require('./config.js');
     } catch (error) {
         console.log(error)
     }
-    if (this.config.token === "")
+    if (this.config.token)
         return new TypeError(
-            "沒有找到 token! 請在 config.js 中輸入您的token!"
+            '沒有找到 token! 請在 config.js 中輸入您的token!'
         );
     const blockedUsers = ['ud1', 'id2'];
 
@@ -61,9 +61,8 @@ const startbot = () => {
         if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
             d += performance.now();
         }
-
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
+            const r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
             return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
         });
@@ -91,14 +90,12 @@ const startbot = () => {
             name: '使用 (/) 呼叫斜線指令',
             value: '或使用 /help 獲取機器人的指令列表',
         })
-
         .setFooter(`${this.config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
 
     const sayblock = new MessageEmbed()
         .setColor(0xE4FFF6)
         .setTitle('封鎖通知')
         .setDescription('機器人拒絕您使用指令，因為您在官方的封鎖名單內')
-
         .setFooter(`${this.config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
 
     const sayinfo = new MessageEmbed()
@@ -124,7 +121,7 @@ const startbot = () => {
     // 當登入成功時發送訊息
     client.once('ready', async () => {
 
-        // leave("要離開的伺服器id")
+        // leave('要離開的伺服器id')
 
         // 終端紀錄
 
@@ -161,8 +158,7 @@ const startbot = () => {
             }],
             status: 'connecting',
         });
-
-      // client.user.setPresence({ activities: [{ name: `機器人更新中` }], status: 'dnd' });
+        // client.user.setPresence({ activities: [{ name: `機器人更新中` }], status: 'dnd' });
         // 終端紀錄
         console.log(chalk.cyan('----------------過程變動區----------------'));
 
@@ -239,7 +235,7 @@ const startbot = () => {
         });
 
         const commandChannel = client.channels.cache.get(this.config.commandRecChannel);
-        commandChannel.send("```" + `【${interaction.guild.name}】：[${interaction.user.tag}]使用了( /${interaction.commandName} )指令` + "```");
+        commandChannel.send('```' + `【${interaction.guild.name}】：[${interaction.user.tag}]使用了( /${interaction.commandName} )指令` + '```');
 
         if (interaction.commandName === 'botping') {
             await interaction.reply(`🏠╎Websocket Latency: ${client.ws.ping}ms\n🤖╎Bot Latency: ${Date.now() - interaction.createdTimestamp}ms`);
@@ -693,7 +689,6 @@ const startbot = () => {
                             .catch(() => {
                                 interaction.editReply('找不到任何東西');
                             });
-                        return;
                     } else if (e.message === 'UNPLAYABLE_YOUTUBE_URL' || e.message === 'INVALID_YOUTUBE_URL') {
                         return interaction.editReply('我無法播放這首歌');
                     }
@@ -1002,7 +997,6 @@ const startbot = () => {
                 url: np.details.from === 'Youtube' ? np.details.data.url : np.audioResource,
             };
 
-
             queue.forEach((v, i) => {
                 const index = ~~(i / 8);
                 if (i % 8 === 0) pages.push([]);
@@ -1039,7 +1033,6 @@ const startbot = () => {
                     customId: 'PageButtonEnd',
                     label: '>|',
                     style: 'PRIMARY',
-
                     disabled: pages.length < 2,
                 }),
             };
@@ -1111,7 +1104,6 @@ const startbot = () => {
 
                         res.setDescription(`\` >> \` [${nowPlaying.name}](${nowPlaying.url})\n\n${pages[index].join('\n')}`)
                             .setFooter(`${interaction.user.tag}・第 ${index + 1}/${pages.length} 頁`, interaction.user.displayAvatarURL());
-
 
                         const newRow = new MessageActionRow({
                             components: Object.values(pageButtons),
@@ -1207,7 +1199,6 @@ const startbot = () => {
                 .setColor(0xE4FFF6);
 
             const voiceChannel = interaction.member.voice.channel;
-
             if (!voiceChannel) {
                 res.setDescription('您不在任何語音頻道內');
                 return interaction.reply({
@@ -1227,12 +1218,8 @@ const startbot = () => {
             return interaction.reply({
                 embeds: [res],
             });
-            await interaction.reply({
-                embeds: [res],
-            });
         }
-
-        if (interaction.commandName === "list-server") {
+        if (interaction.commandName === 'list-server') {
             if (interaction.user.id == this.config.owner) {
                 client.guilds.cache.forEach(guild => {
                     console.log(chalk.yellow('所在伺服 ') + `${guild.name} | ${guild.id}`);
@@ -1612,12 +1599,12 @@ const startbot = () => {
                 b = '布';
             }
             if (youcho == botcho) return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：雙方選擇相同，平手`);
-            if (youcho == "sci" && botcho == "sto") return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
-            if (youcho == "sci" && botcho == "pap") return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您贏了`);
-            if (youcho == "pap" && botcho == "sto") return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您贏了`);
-            if (youcho == "pap" && botcho == "sci") return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
-            if (youcho == "sto" && botcho == "sci") return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您贏了`);
-            if (youcho == "sto" && botcho == "pap") return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
+            if (youcho == 'sci' && botcho == 'sto') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
+            if (youcho == 'sci' && botcho == 'pap') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您贏了`);
+            if (youcho == 'pap' && botcho == 'sto') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您贏了`);
+            if (youcho == 'pap' && botcho == 'sci') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
+            if (youcho == 'sto' && botcho == 'sci') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您贏了`);
+            if (youcho == 'sto' && botcho == 'pap') return interaction.reply(`你選擇：${a}；機器人選擇：${b}\n結果：您輸了`);
         }
         if (interaction.commandName === 'bullshitter') {
             const bullreply = `${bullshitter[getRandom(bullshitter.length) - 1]}`;
@@ -1628,7 +1615,6 @@ const startbot = () => {
                 .setTitle(`${topic}`)
                 .setDescription(`${reply}`)
                 .setFooter(`${interaction.user.tag}`, `${interaction.user.displayAvatarURL()}`);
-
             interaction.reply({
                 embeds: [replyans]
             })
@@ -1641,7 +1627,7 @@ const startbot = () => {
         }
     });
 
-   //this.config.token登入
+    // this.config.token登入
     client.login(this.config.token);
 
 }
