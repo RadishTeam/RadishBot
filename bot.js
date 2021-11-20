@@ -668,25 +668,16 @@ const startbot = () => {
             };
 
             const query = interaction.options.getString('url');
-            manager.play(query, {
-                player: interaction.member,
-                details: {},
-            })
-                .then(afterPlay)
-                .catch(e => {
-                    if (e.message === 'UNSUPPORTED_URL_TYPE') {
-                        return YoutubeUtils.searchFirstVideo(query)
-                            .then(data => data.play(manager, {
-                                player: interaction.member,
-                            }).then(afterPlay))
-                            .catch(() => {
-                                interaction.editReply('找不到任何東西');
-                            });
-                    } else if (e.message === 'UNPLAYABLE_YOUTUBE_URL' || e.message === 'INVALID_YOUTUBE_URL') {
-                        return interaction.editReply('我無法播放這首歌');
-                    }
-                    throw e;
-                });
+            if (YoutubeUtils.isYoutubeLink(query)) try {
+                return afterPlay(await manager.play(query, { player: interaction.member }));
+            } catch (_) {
+                return interaction.editReply('我無法播放這首歌');
+            } else try {
+                return afterPlay(await (await YoutubeUtils.searchFirstVideo(query)).play(manager, { player: interaction.member }));
+            } catch (_) {
+                interaction.editReply('找不到任何東西');
+            }
+
         }
         if (interaction.commandName === 'pause') {
             const res = new MessageEmbed()
