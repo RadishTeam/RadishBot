@@ -1505,7 +1505,7 @@ const startbot = (config) => {
                 return interaction.reply(`${invite.code}`);
             });
         }
-        if (interaction.commandName === 'together-fishingtonr') {
+        if (interaction.commandName === 'together-fishington') {
             if (!interaction.member.voice.channel) return interaction.reply('請先加入一個語音頻道');
             client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'fishing').then(async invite => {
                 return interaction.reply(`${invite.code}`);
