@@ -2,7 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: 🤔 問題
     url: https://github.com/WinsonOTP/RadishBot/issues
-    about: 你可以開啓 Issues, 我們很快就會為您提供支援!
+    about: 你可以開啟 Issues，我們很快就會為您提供支援!
   - name: 💬 聊天
     url: https://discord.gg/YFGfwaNgBX
     about: 想要與其他人討論關於機器人的話題嗎? 加入我們的伺服器吧!
