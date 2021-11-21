@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "ncu -u && npm i"
+    "update": "ncu -u && npm i",
+    "el": "eslint ."
   },
   "author": "Winson_章魚",
   "license": "GNU GPL",
