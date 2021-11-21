@@ -4,8 +4,8 @@ body:
   - type: textarea
     id: current-behavior
     attributes:
-      label: 當前行爲
-      description: 包括屏幕截圖、堆疊追踪、調試日誌等的描述
+      label: 當前行為
+      description: 包括螢幕截圖、堆疊追蹤、審核日誌等的描述
       placeholder: 當前...
     validations:
       required: true
@@ -13,8 +13,8 @@ body:
   - type: textarea
     id: desired-behavior
     attributes:
-      label: 預期行爲
-      description: 對於預期行爲的詳細描述
+      label: 預期行為
+      description: 對於預期行為的詳細描述
       placeholder: 機器人應該...
     validations:
       required: true
@@ -23,4 +23,4 @@ body:
     id: other
     attributes:
       label: 其他細節
-      placeholder: 有任何其他細節嗎?
+      placeholder: 有任何其他細節嗎？

@@ -6,8 +6,8 @@ body:
   - type: textarea
     id: current-behavior
     attributes:
-      label: 當前行爲
-      description: 包括屏幕截圖、堆疊追踪、調試日誌、執行過的安裝指令等的描述。
+      label: 當前行為
+      description: 包括螢幕截圖、堆疊追蹤、審核日誌、執行過的安裝指令等的描述。
       placeholder: 當我嘗試安裝...
     validations:
       required: true
@@ -16,7 +16,7 @@ body:
     id: debug-logs
     attributes:
       label: 終端輸出
-      description: 終端輸出的屏幕截圖或是直接貼上
+      description: 終端輸出的螢幕截圖或是直接貼上
       placeholder: 輸出
   
   - type: dropdown
@@ -35,7 +35,7 @@ body:
   - type: dropdown
     id: operating-system
     attributes:
-      label: 操作系統
+      label: 作業系統
       options:
         - Linux (Ubuntu)
         - Linux (CentOS)
@@ -49,4 +49,4 @@ body:
     id: other
     attributes:
       label: 其他細節
-      placeholder: 有任何其他細節嗎?
+      placeholder: 有任何其他細節嗎？
