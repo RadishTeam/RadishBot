@@ -2,11 +2,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const chalk = require('chalk');
 const fs = require('fs');
-const logincommand = () => {
-    const {
-        token,
-        clientID,
-    } = require('./config.json');
+const logincommand = ({ clientID, token }) => {
     const commands = [];
     const cmdDirs = fs.readdirSync('./commands');
     for (const dir of cmdDirs) {

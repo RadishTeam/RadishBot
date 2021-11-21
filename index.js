@@ -19,7 +19,7 @@ try {
 if (!this.config.token) throw new TypeError('沒有找到 token! 請在 config.js 中輸入您的token!');
 
 if (this.config.slashcmdreg) {
-    require('./sub_command')();
+    require('./sub_command')(this.config);
 }
 
 // True when you want to run the bot
