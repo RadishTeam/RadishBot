@@ -1,11 +1,13 @@
 {
   "name": "radish-bot",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "用於管理、娛樂，也可以協助您完成生活的大小事！讓您更加方便的使用Discord，涵蓋了各大常用功能，包羅萬象！",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "ncu -u && npm i"
+    "update": "ncu -u && npm i",
+    "install-and-update": "npm i -g npm-check-updates && ncu -u && npm i",
+    "el": "eslint ."
   },
   "author": "Winson_章魚",
   "license": "GNU GPL",

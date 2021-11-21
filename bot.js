@@ -18,15 +18,7 @@ const translate = require('translate-google');
 const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] });
 // const currency = new Collection();
 /* ----------------------------------------------------------------------------------------------- */
-const startbot = () => {
-    try {
-        // Config
-        this.config = require('./config.js');
-    } catch (error) {
-        console.log(error);
-    }
-    if (!this.config.token)
-        return new TypeError('沒有找到 token! 請在 config.js 中輸入您的token!');
+const startbot = (config) => {
     const blockedUsers = ['ud1', 'id2'];
 
     function timeResolve(second) {
@@ -81,23 +73,23 @@ const startbot = () => {
 
     const sayinvite = new MessageEmbed()
         .setColor(0xE4FFF6)
-        .setTitle(`${this.config.botName}`)
-        .setDescription(`感謝您邀請${this.config.botName}到您的伺服器`)
+        .setTitle(`${config.botName}`)
+        .setDescription(`感謝您邀請${config.botName}到您的伺服器`)
         .addFields({
             name: '使用 (/) 呼叫斜線指令',
             value: '或使用 /help 獲取機器人的指令列表',
         })
-        .setFooter(`${this.config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
+        .setFooter(`${config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
 
     const sayblock = new MessageEmbed()
         .setColor(0xE4FFF6)
         .setTitle('封鎖通知')
         .setDescription('機器人拒絕您使用指令，因為您在官方的封鎖名單內')
-        .setFooter(`${this.config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
+        .setFooter(`${config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
 
     const sayinfo = new MessageEmbed()
         .setColor(0xE4FFF6)
-        .setTitle(`${this.config.botName} - 機器人資訊`)
+        .setTitle(`${config.botName} - 機器人資訊`)
         .setDescription('機器人的相關資訊')
         .addFields({
             name: '邀請機器人',
@@ -140,7 +132,7 @@ const startbot = () => {
 
         // 終端紀錄
         console.log(chalk.blue('啟動通知 ') + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒');
-        const conchannel = client.channels.cache.get(this.config.consoleChannel);
+        const conchannel = client.channels.cache.get(config.consoleChannel);
         conchannel.send('```' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒' + ' 機器人啟動成功```');
         // 終端紀錄
         console.log(chalk.blue('啟動通知 ') + `${client.guilds.cache.size} 個伺服器`);
@@ -161,20 +153,20 @@ const startbot = () => {
 
     });
     client.on('messageCreate', async message => {
-        if (message.guildId != this.config.recServer) return;
+        if (message.guildId != config.recServer) return;
         if (message.content == prefix + 'test') {
             message.reply('機器人訊息回覆成功運行');
 
         }
     });
     client.on('messageDelete', message => {
-        if (message.guildId != this.config.recServer) return;
+        if (message.guildId != config.recServer) return;
         const sayre = new MessageEmbed()
             .setColor(0xE4FFF6)
             .setTitle('審核日誌')
             .setDescription(`一則由 ${message.author.tag} 發送的訊息遭到刪除\n內容：${message.content}`)
-            .setFooter(`${this.config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
-        const rechannel = client.channels.cache.get(this.config.serverRecChannel);
+            .setFooter(`${config.botName}`, 'https://cdn.discordapp.com/avatars/891195320690700299/7e70c4d7db63c7466488c8e9c6319307.png?size=80');
+        const rechannel = client.channels.cache.get(config.serverRecChannel);
         rechannel.send({
             embeds: [sayre],
         });
@@ -190,7 +182,7 @@ const startbot = () => {
         });
 
         // console 頻道
-        const invitechannel = client.channels.cache.get(this.config.inviteChannel);
+        const invitechannel = client.channels.cache.get(config.inviteChannel);
         // 進退變動 加入
         invitechannel.send('```' + `機器人已加入：${guild.name}` + '```');
 
@@ -210,7 +202,7 @@ const startbot = () => {
         });
 
         // console 頻道
-        const invitechannel = client.channels.cache.get(this.config.inviteChannel);
+        const invitechannel = client.channels.cache.get(config.inviteChannel);
         // 進退變動 離開
         invitechannel.send('```' + `機器人已離開：${guild.name}` + '```');
     });
@@ -231,7 +223,7 @@ const startbot = () => {
             embeds: [sayblock],
         });
 
-        const commandChannel = client.channels.cache.get(this.config.commandRecChannel);
+        const commandChannel = client.channels.cache.get(config.commandRecChannel);
         commandChannel.send('```' + `【${interaction.guild.name}】：[${interaction.user.tag}]使用了( /${interaction.commandName} )指令` + '```');
 
         if (interaction.commandName === 'botping') {
@@ -404,7 +396,7 @@ const startbot = () => {
                     '回報者',
                     `${interaction.user.tag} • \`${interaction.user.id}\``,
                 );
-            const reportchannel = client.channels.cache.get(this.config.reportChannel);
+            const reportchannel = client.channels.cache.get(config.reportChannel);
             reportchannel.send({
                 embeds: [suggestembed],
             });
@@ -1200,7 +1192,7 @@ const startbot = () => {
             });
         }
         if (interaction.commandName === 'list-server') {
-            if (interaction.user.id == this.config.owner) {
+            if (interaction.user.id == config.owner) {
                 client.guilds.cache.forEach(guild => {
                     console.log(chalk.yellow('所在伺服 ') + `${guild.name} | ${guild.id}`);
                 });
@@ -1219,7 +1211,7 @@ const startbot = () => {
         }
         if (interaction.commandName === 'presence') {
             const presence = interaction.options.getString('presence');
-            if (interaction.user.id == this.config.owner) {
+            if (interaction.user.id == config.owner) {
                 client.user.setStatus(`${presence}`);
                 interaction.reply('成功設定機器人狀態');
             } else {
@@ -1513,7 +1505,7 @@ const startbot = () => {
                 return interaction.reply(`${invite.code}`);
             });
         }
-        if (interaction.commandName === 'together-fishingtonr') {
+        if (interaction.commandName === 'together-fishington') {
             if (!interaction.member.voice.channel) return interaction.reply('請先加入一個語音頻道');
             client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'fishing').then(async invite => {
                 return interaction.reply(`${invite.code}`);
@@ -1598,8 +1590,8 @@ const startbot = () => {
     });
     */
 
-    // this.config.token登入
-    client.login(this.config.token);
+    // config.token登入
+    client.login(config.token);
 
 };
 
