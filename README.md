@@ -33,7 +33,7 @@ npm install
 
 1. 拉取檔案後，如果沒有安裝 `npm-check-updates` 或 `eslint` 套件，請在終端機執行：
 ```
-npm run env
+npm run dev
 ```
 
 2. 在終端機執行下列指令：
@@ -42,7 +42,7 @@ npm run check
 ```
 如果ESLint報出錯誤，則依ESLint的提示修改。修改完後執行：
 ```
-npm run el
+npm run lint
 ```
 重複此步驟直到ESLint沒有報錯為止。
 
