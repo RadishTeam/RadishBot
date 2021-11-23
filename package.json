@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "update": "ncu -u && npm i",
-    "el": "eslint .",
-    "env": "npm i -g npm-check-updates eslint",
+    "lint": "eslint .",
+    "dev": "npm i -g npm-check-updates eslint",
     "check": "npm run update && npm run el"
   },
   "author": "Winson_章魚",
