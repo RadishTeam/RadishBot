@@ -9,7 +9,10 @@ jobs:
     - name: Install modules
       run: npm install
       
-    - name: Run ESLint #ESLint
+    - name: Install ESLint #ESLint
+      run: npm install -g ESLint
+      
+    - name: Run ESLint
       run: eslint . --ext .js,.jsx,.ts,.tsx
       
     - name: Run eslint with reviewdog #ESLint Review Dog
