@@ -25,3 +25,5 @@ jobs:
           eslint: true
           prettier: true
           auto_fix: true
+          git_name: "執行 ESLint & Prettier"
+          commit_message: "使用 ${linter} 改進代碼質量"
