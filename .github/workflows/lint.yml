@@ -18,6 +18,9 @@ jobs:
 
       - name: Install Node.js dependencies
         run: npm ci
+      
+      - name: Install ESLint and Prettier
+        run: npm install -g eslint prettier
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
