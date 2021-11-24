@@ -7,12 +7,12 @@ console.log = (...args) => {
 }
 */
 console.log(chalk.magenta("----------------啟動訊息區-----------------"));
-console.log(chalk.red("開始啟動 ") + "機器人已開始啟動");
+console.log(chalk.red("開始啟動 ") +"機器人已開始啟動");
 
 try {
   // Config
   this.config = require("./config.js");
-} catch (e) {
+} catch ( e ) {
   console.log(e);
 }
 
@@ -26,6 +26,6 @@ if (this.config.slashcmdreg) {
 // True when you want to run the bot
 const botRun = true;
 
-if (botRun) {
+if  (botRun)   {
   require("./bot")(this.config);
 }
