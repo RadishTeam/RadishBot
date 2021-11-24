@@ -1,0 +1,19 @@
+name: '關閉穩定 Issues / PR'
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v4
+        with:
+          stale-issue-message: '這個 Issue 已經被標記爲穩定, 如果五天之内沒有任何留言或其他活動則會關閉 Issue'
+          stale-pr-message: '這個 Issue 已經被標記爲穩定, 如果五天之内沒有任何留言或其他活動則會關閉 Issue'
+          close-issue-message: '這個 Issue / PR 已經被關閉因爲在標記爲穩定之後五天沒有任何活動'
+          days-before-stale: 30
+          days-before-close: 5
+          days-before-pr-close: 30
+          
+          
