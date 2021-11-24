@@ -23,7 +23,9 @@
     "discord.js": "^13.3.1",
     "fs": "^0.0.1-security",
     "translate-google": "^1.5.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "prettier": "^2.4.1",
+    "eslint": "^8.3.0"
   },
   "devDependencies": {
     "eslint": "^8.3.0",
