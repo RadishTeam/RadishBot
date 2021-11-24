@@ -9,11 +9,8 @@ jobs:
     - name: Install modules
       run: npm install
       
-    - name: Install ESLint #ESLint
-      run: npm install -g eslint
+    - name: Lint Action #wearerequired/lint-action
+      uses: wearerequired/lint-action@v1.10.0
       
-    - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
-      
-    - name: Run eslint with reviewdog #ESLint Review Dog
+    - name: Run ESLint with reviewdog #ESLint Review Dog
       uses: reviewdog/action-eslint@v1.14.0
