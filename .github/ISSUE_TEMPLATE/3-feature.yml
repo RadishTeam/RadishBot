@@ -1,7 +1,6 @@
 name: "✨ 新功能"
 description: 提議新功能來幫助我們變得更好！
 body:
-
   - type: textarea
     id: feature
     attributes:

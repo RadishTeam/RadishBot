@@ -9,7 +9,7 @@ body:
       placeholder: 當前...
     validations:
       required: true
-      
+
   - type: textarea
     id: desired-behavior
     attributes:
@@ -18,7 +18,7 @@ body:
       placeholder: 機器人應該...
     validations:
       required: true
-      
+
   - type: textarea
     id: other
     attributes:

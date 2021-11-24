@@ -1,8 +1,7 @@
 name: "⬇️ 安裝時發生的問題"
 description: 安裝機器人時發生的問題
-labels: ['topic: installation']
+labels: ["topic: installation"]
 body:
-
   - type: textarea
     id: current-behavior
     attributes:
@@ -11,14 +10,14 @@ body:
       placeholder: 當我嘗試安裝...
     validations:
       required: true
-      
+
   - type: textarea
     id: debug-logs
     attributes:
       label: 終端輸出
       description: 終端輸出的螢幕截圖或是直接貼上
       placeholder: 輸出
-  
+
   - type: dropdown
     id: package-manager
     attributes:
@@ -31,7 +30,7 @@ body:
         - Others
     validations:
       required: true
-      
+
   - type: dropdown
     id: operating-system
     attributes:
