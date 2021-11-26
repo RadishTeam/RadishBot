@@ -1,2 +1,0 @@
-- name: 運行 ESLint
-  uses: reviewdog/action-eslint@v1.14.0
