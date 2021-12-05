@@ -13,7 +13,7 @@ const {
     YoutubeUtils,
 } = require('@kyometori/djsmusic');
 const chalk = require('chalk');
-const fs = require('fs');
+const fs = require('fs-extra');
 const translate = require('translate-google');
 const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] });
 // const currency = new Collection();
