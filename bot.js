@@ -133,6 +133,7 @@ const startbot = (config) => {
         // 終端紀錄
         console.log(chalk.blue('啟動通知 ') + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒');
         const conchannel = client.channels.cache.get(config.consoleChannel);
+        if (this.config.ci) return conchannel.send('```' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒' + ' CI測試成功```');
         conchannel.send('```' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒' + ' 機器人啟動成功```');
         // 終端紀錄
         console.log(chalk.blue('啟動通知 ') + `${client.guilds.cache.size} 個伺服器`);
