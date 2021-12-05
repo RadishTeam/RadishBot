@@ -19,7 +19,7 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
       
-      - name: Install ESLint and Prettier
+      - name: Install ESLint
         run: npm install -g eslint prettier
 
       - name: Run linters
