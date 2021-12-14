@@ -12,4 +12,5 @@ module.exports = {
     commandRecChannel: process.env.commandRecChannel || '在此輸入或使用.env', // 機器人指令的使用紀錄會記錄在這個頻道 (填入ID)
     reportChannel: process.env.reportChannel || '在此輸入或使用.env', // 若有錯誤的回報會記錄在這個頻道 (填入ID)
     slashcmdreg: process.env.slashcmdreg || '在此輸入或使用.env', // 第一次啟動請用true，否則請用false(清空字串)，如果為true則會註冊機器人互動應用程式指令 (/)
+    CI: process.env.CI,
 };
