@@ -141,7 +141,7 @@ const startbot = (config) => {
         // CI
         const ci = process.env.CI;
         function cie() {
-            console.log(chalk.blue('CI通知 ') + `機器人測試成功!`);
+            console.log(chalk.blue('CI通知 ') + '機器人測試成功!');
             process.exit();
         }
         if (ci === 'true') return cie();
