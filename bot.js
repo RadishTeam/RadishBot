@@ -7,7 +7,9 @@ const {
     MessageEmbed,
     MessageSelectMenu,
 } = require('discord.js');
-const { DiscordTogether } = require('discord-together');
+const {
+    DiscordTogether,
+} = require('discord-together');
 const {
     createMusicManager,
     YoutubeUtils,
@@ -15,7 +17,9 @@ const {
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const translate = require('translate-google');
-const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] });
+const client = new Client({
+    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'],
+});
 // const currency = new Collection();
 /* ----------------------------------------------------------------------------------------------- */
 const startbot = (config) => {
@@ -133,7 +137,10 @@ const startbot = (config) => {
         // 終端紀錄
         console.log(chalk.blue('啟動通知 ') + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒');
         const conchannel = client.channels.cache.get(config.consoleChannel);
-        if (this.config.ci) return conchannel.send('```' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒' + ' CI測試成功```');
+
+        // CI
+        if (config.CI === true) return process.exit();
+
         conchannel.send('```' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒' + ' 機器人啟動成功```');
         // 終端紀錄
         console.log(chalk.blue('啟動通知 ') + `${client.guilds.cache.size} 個伺服器`);
@@ -662,11 +669,15 @@ const startbot = (config) => {
 
             const query = interaction.options.getString('url');
             if (YoutubeUtils.isYoutubeLink(query)) try {
-                return afterPlay(await manager.play(query, { player: interaction.member }));
+                return afterPlay(await manager.play(query, {
+                    player: interaction.member,
+                }));
             } catch (_) {
                 return interaction.editReply('我無法播放這首歌');
             } else try {
-                return afterPlay(await (await YoutubeUtils.searchFirstVideo(query)).play(manager, { player: interaction.member }));
+                return afterPlay(await (await YoutubeUtils.searchFirstVideo(query)).play(manager, {
+                    player: interaction.member,
+                }));
             } catch (_) {
                 interaction.editReply('找不到任何東西');
             }
