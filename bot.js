@@ -139,10 +139,10 @@ const startbot = (config) => {
         const conchannel = client.channels.cache.get(config.consoleChannel);
 
         // CI
-        const ci = process.env.CI
+        const ci = process.env.CI;
         function cie() {
             conchannel.send('```' + Today.getFullYear() + ' 年 ' + (Today.getMonth() + 1) + ' 月 ' + day + ' 日 ' + hours + ' 時 ' + Today.getMinutes() + ' 分 ' + Today.getSeconds() + ' 秒' + ' CI測試```');
-            process.exit()
+            process.exit();
         }
         if (ci === 'true') return cie();
 
