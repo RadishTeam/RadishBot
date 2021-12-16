@@ -9,7 +9,7 @@ npm install
 ```
 
 2. 接著將config.js中的各個數據替換為自己機器人的或者使用.env
-( token 以及 client-ID 可以從 https://discord.com/developers/applications 找到 ) （請注意將 CI 參數設爲 `false`）
+( token 以及 client-ID 可以從 https://discord.com/developers/applications 找到 ) 
 
 3. 運行index.js讓機器人註冊指令並開始運行，此時機器人會上線。
 
