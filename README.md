@@ -1,7 +1,15 @@
-# RadishBot
+### RadishBot
+> [![WardDa5h](https://github-readme-stats.vercel.app/api/pin/?username=RadishTeam&repo=RadishBot&show_icons=true&bg_color=23272A&title_color=FF73F1&text_color=FFC0CB&icon_color=9B84EE&count_private=true&border_color=fAA61A&border_radius=10)](https://github.com/RadishTeam/RadishBot)  
+> ![CodeFactor](https://img.shields.io/codefactor/grade/github/RadishTeam/RadishBot/main?color=%23F44A6A&logo=codefactor&style=for-the-badge) ![commit](https://img.shields.io/github/last-commit/RadishTeam/RadishBot?color=%23181717&logo=GitHub&style=for-the-badge)  
+> ![Scrutinizer](https://img.shields.io/scrutinizer/quality/g/RadishTeam/RadishBot/main?style=for-the-badge) ![ScrutinizerBuilding](https://img.shields.io/scrutinizer/build/g/RadishTeam/RadishBot/main?style=for-the-badge)  
+> ![CodeQL](https://img.shields.io/github/workflow/status/RadishTeam/RadishBot/CodeQL?label=CodeQL&style=for-the-badge) ![Lint](https://img.shields.io/github/workflow/status/RadishTeam/RadishBot/Lint?label=Lint&style=for-the-badge)  
+> ![CircleCI](https://img.shields.io/circleci/build/github/RadishTeam/RadishBot?label=CircleCI&style=for-the-badge)  
+> ![JavaScript](https://img.shields.io/badge/JavaScript-yellow?style=for-the-badge&logo=JavaScript) 
+
 此專案是Discord中RadishBot機器人的原始碼，使用Discord.js v13製作
 使用時請遵照 GNU GPL 開源協議
 
+  
 ## 🔮 使用說明
 1. 使用前請先下載所有檔案，並在終端機輸入以下指令：
 ```
