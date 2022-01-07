@@ -9,8 +9,7 @@ workflows:
       - node/test:
           name: NodeJS v16.* test
           version: 16.13.1
-        - run: node --trace-deprecation .
+          run: echo test
       - node/test:
           name: NodeJS v17.* test
           version: 17.2.0
-         - run: node --trace-deprecation .
