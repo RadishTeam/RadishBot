@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "dev": "npm i -g npm-check-updates eslint",
     "check": "npm run update && npm run lint",
+    "webpack": "webpack -d -w",
     "heroku-postbuild": "webpack -d"
   },
   "engines": {
