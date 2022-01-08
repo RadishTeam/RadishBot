@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "CI=true node --trace-deprecation index.js",
+    "start": "nodem index.js",
     "update": "ncu -u && npm i",
     "lint": "eslint .",
     "dev": "npm i -g npm-check-updates eslint",
     "check": "npm run update && npm run lint"
+    "heroku-postbuild": "webpack -d"
   },
   "author": "Winson_章魚",
   "license": "GNU GPL",
