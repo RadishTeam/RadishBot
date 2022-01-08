@@ -7,7 +7,7 @@
     "test": "CI=true node --trace-deprecation index.js",
     "start": "node index.js",
     "webpack": "webpack -d -w",
-    "heroku-postbuild": "webpack -d",
+    "heroku-postbuild": "node index.js",
     "update": "ncu -u && npm i",
     "lint": "eslint .",
     "dev": "npm i -g npm-check-updates eslint",
