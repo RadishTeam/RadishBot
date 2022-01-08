@@ -12,6 +12,9 @@
     "check": "npm run update && npm run lint",
     "heroku-postbuild": "webpack -d"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "author": "Winson_章魚",
   "license": "GNU GPL",
   "dependencies": {
