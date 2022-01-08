@@ -12,3 +12,14 @@ workflows:
       - node/test:
           name: NodeJS v17.* test
           version: 17.2.0
+          
+  run-npm-command:
+    jobs:
+      - node/run:
+          name: Check deprecated
+          node-version: '16.13.1'
+          npm-run: deprecated
+      - node/run:
+          name: Check deprecated
+          node-version: '17.2.0'
+          npm-run: deprecated
