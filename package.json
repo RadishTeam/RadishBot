@@ -14,7 +14,7 @@
     "check": "npm run update && npm run lint"    
   },
   "engines": {
-    "node": "16.x"
+    "node": "^16.13.1"
   },
   "author": "Winson_章魚",
   "license": "GNU GPL",
