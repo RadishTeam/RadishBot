@@ -13,7 +13,7 @@ workflows:
           name: NodeJS v17.* test
           version: 17.2.0
           
-  run-npm-command:
+  matrix-tests:
     jobs:
       - node/run:
           name: Check deprecated
