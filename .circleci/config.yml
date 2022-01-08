@@ -6,10 +6,11 @@ version: 2.1 # using 2.1 provides access to orbs and other features
 workflows:
   matrix-tests:
     jobs:
-      - node/test:
-          name: NodeJS v16.* test
-          version: 16.13.1
-      - node/test:
-          name: NodeJS v17.* test
-          version: 17.2.0
-    parallelism: 4
+      test:
+        - node/test:
+            name: NodeJS v16.* test
+            version: 16.13.1
+        - node/test:
+            name: NodeJS v17.* test
+            version: 17.2.0
+      parallelism: 4
