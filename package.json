@@ -4,12 +4,11 @@
   "description": "用於管理、娛樂，也可以協助您完成生活的大小事！讓您更加方便的使用Discord，涵蓋了各大常用功能，包羅萬象！",
   "main": "index.js",
   "scripts": {
-    "test": "node --check index.js && node --check bot.js && node index.js",
+    "test": "CI=true node --trace-deprecation index.js",
     "update": "ncu -u && npm i",
     "lint": "eslint .",
     "dev": "npm i -g npm-check-updates eslint",
-    "check": "npm run update && npm run lint",
-    "deprecated": "node --trace-deprecation index.js"
+    "check": "npm run update && npm run lint"
   },
   "author": "Winson_章魚",
   "license": "GNU GPL",
