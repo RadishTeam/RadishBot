@@ -9,6 +9,8 @@ workflows:
       - node/test:
           name: NodeJS v16.* test
           version: 16.13.1
+          parallelism: 4
       - node/test:
           name: NodeJS v17.* test
           version: 17.2.0
+          parallelism: 4
