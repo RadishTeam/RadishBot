@@ -13,4 +13,3 @@ workflows:
         - node/test:
             name: NodeJS v17.* test
             version: 17.2.0
-      parallelism: 4
