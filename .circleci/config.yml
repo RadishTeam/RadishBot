@@ -9,9 +9,9 @@ workflows:
       - node/test:
           name: NodeJS v16.* test
           version: 16.13.1
-          run-command: npm run deprecated 
+          run-command: test
       - node/test:
           name: NodeJS v17.* test
           version: 17.2.0
-          run-command: npm run deprecated 
+          run-command: test
           
