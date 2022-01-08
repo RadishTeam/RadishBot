@@ -1,4 +1,4 @@
-dorbs: # declare what orbs we are going to use
+orbs: # declare what orbs we are going to use
   node: circleci/node@2.0.2 # the node orb provides common node-related configuration
   
 version: 2.1 # using 2.1 provides access to orbs and other features
@@ -9,9 +9,6 @@ workflows:
       - node/test:
           name: NodeJS v16.* test
           version: 16.13.1
-          run-command: test
       - node/test:
           name: NodeJS v17.* test
           version: 17.2.0
-          run-command: test
-          
