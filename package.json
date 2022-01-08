@@ -9,7 +9,7 @@
     "update": "ncu -u && npm i",
     "lint": "eslint .",
     "dev": "npm i -g npm-check-updates eslint",
-    "check": "npm run update && npm run lint"
+    "check": "npm run update && npm run lint",
     "heroku-postbuild": "webpack -d"
   },
   "author": "Winson_章魚",
