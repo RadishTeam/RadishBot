@@ -13,9 +13,6 @@
     "dev": "npm i -g npm-check-updates eslint",
     "check": "npm run update && npm run lint"    
   },
-  "engines": {
-    "node": "^16.13.1"
-  },
   "author": "Winson_章魚",
   "license": "GNU GPL",
   "dependencies": {
