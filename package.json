@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "eslint": "^8.8.0",
-    "npm-check-updates": "^12.2.1"
+    "npm-check-updates": "^12.3.0"
   }
 }
